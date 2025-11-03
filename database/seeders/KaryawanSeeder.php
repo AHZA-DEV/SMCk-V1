@@ -10,20 +10,25 @@ class KaryawanSeeder extends Seeder
 {
     public function run()
     {
+        // Tambahkan HRD
+        Karyawan::create([
+            'nip' => 'HRD001',
+            'nama_depan' => 'Sarah',
+            'nama_belakang' => 'Wijaya',
+            'email' => 'hrd@gmail.com',
+            'password' => Hash::make('password'),
+            'id_departemen' => 2,
+            'jabatan' => 'HRD Manager',
+            'tanggal_mulai_kerja' => '2019-01-15',
+            'no_telepon' => '081234567899',
+            'alamat' => 'Jl. HR No. 1 Jakarta',
+            'peran' => 'hrd',
+            'sisa_cuti' => 12,
+            'foto_profil' => 'default.png'
+        ]);
+
+        // Karyawan biasa
         $karyawans = [
-            [
-                'nip' => 'ADM001',
-                'nama_depan' => 'Admin',
-                'nama_belakang' => 'Sistem',
-                'email' => 'admin@gmail.com',
-                'password' => Hash::make('password'),
-                'id_departemen' => 2,
-                'jabatan' => 'Administrator',
-                'tanggal_mulai_kerja' => '2020-01-01',
-                'peran' => 'admin',
-                'sisa_cuti' => 12,
-                'foto_profil' => 'default.png'
-            ],
             [
                 'nip' => 'KRY001',
                 'nama_depan' => 'Budi',
@@ -82,6 +87,21 @@ class KaryawanSeeder extends Seeder
                 'alamat' => 'Jl. Thamrin No. 8 Jakarta',
                 'peran' => 'karyawan',
                 'sisa_cuti' => 12,
+                'foto_profil' => 'default.png'
+            ],
+            [
+                'nip' => 'KRY005',
+                'nama_depan' => 'Rina',
+                'nama_belakang' => 'Kusuma',
+                'email' => 'rina.kusuma@perusahaan.com',
+                'password' => Hash::make('password'),
+                'id_departemen' => 1,
+                'jabatan' => 'Designer',
+                'tanggal_mulai_kerja' => '2021-06-01',
+                'no_telepon' => '081234567894',
+                'alamat' => 'Jl. Kuningan No. 15 Jakarta',
+                'peran' => 'karyawan',
+                'sisa_cuti' => 11,
                 'foto_profil' => 'default.png'
             ]
         ];
