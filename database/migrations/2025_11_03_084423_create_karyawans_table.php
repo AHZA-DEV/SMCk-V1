@@ -20,7 +20,7 @@ return new class extends Migration
             $table->date('tanggal_mulai_kerja')->nullable();
             $table->string('no_telepon', 20)->nullable();
             $table->text('alamat')->nullable();
-            $table->enum('peran', ['admin', 'karyawan'])->default('karyawan');
+            $table->enum('peran', ['hrd', 'karyawan'])->default('karyawan');
             $table->integer('sisa_cuti')->default(12);
             $table->string('foto_profil')->default('default.png');
             $table->timestamps();
