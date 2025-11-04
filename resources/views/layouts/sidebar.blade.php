@@ -17,43 +17,43 @@
                 </a>
             </li>
 
-            <li class="menu-item {{ Request::is('admin/kelola-karyawan*') ? 'active' : '' }}">
-                <a href="" class="menu-link">
+            <li class="menu-item {{ Request::is('admin/karyawan*') ? 'active' : '' }}">
+                <a href="{{ route('admin.karyawan.index') }}" class="menu-link">
                     <i class="bi bi-people"></i>
                     <span>Kelola Karyawan</span>
                 </a>
             </li>
 
-            <li class="menu-item {{ Request::is('admin/kelola-departemen*') ? 'active' : '' }}">
-                <a href="#" class="menu-link">
+            <li class="menu-item {{ Request::is('admin/departemen*') ? 'active' : '' }}">
+                <a href="{{ route('admin.departemen.index') }}" class="menu-link">
                     <i class="bi bi-building"></i>
                     <span>Kelola Departemen</span>
                 </a>
             </li>
 
-            <li class="menu-item {{ Request::is('admin/kelola-hrd*') ? 'active' : '' }}">
-                <a href="#" class="menu-link">
+            <li class="menu-item {{ Request::is('admin/hrd*') ? 'active' : '' }}">
+                <a href="{{ route('admin.hrd.index') }}" class="menu-link">
                     <i class="bi bi-person-badge"></i>
                     <span>Kelola HRD</span>
                 </a>
             </li>
 
-            <li class="menu-item {{ Request::is('admin/kelola-cuti*') ? 'active' : '' }}">
-                <a href="#" class="menu-link">
+            <li class="menu-item {{ Request::is('admin/cuti*') ? 'active' : '' }}">
+                <a href="{{ route('admin.cuti.index') }}" class="menu-link">
                     <i class="bi bi-calendar-check"></i>
                     <span>Kelola Cuti</span>
                 </a>
             </li>
 
             <li class="menu-item {{ Request::is('admin/laporan*') ? 'active' : '' }}">
-                <a href="#" class="menu-link">
+                <a href="{{ route('admin.laporan.index') }}" class="menu-link">
                     <i class="bi bi-file-earmark-bar-graph"></i>
                     <span>Laporan</span>
                 </a>
             </li>
 
             <li class="menu-item {{ Request::is('admin/pengaturan*') ? 'active' : '' }}">
-                <a href="#" class="menu-link">
+                <a href="{{ route('admin.pengaturan.index') }}" class="menu-link">
                     <i class="bi bi-gear"></i>
                     <span>Pengaturan Sistem</span>
                 </a>

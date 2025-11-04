@@ -1,10 +1,11 @@
+
 @extends('layouts.app')
 
 @section('content')
 <div class="d-flex justify-content-between align-items-center mb-4">
-    <h2>Kelola Departemen</h2>
-    <a href="{{ route('admin.departemen.create') }}" class="btn btn-primary">
-        <i class="bi bi-plus-circle me-2"></i>Tambah Departemen
+    <h2>Kelola Jenis Cuti</h2>
+    <a href="{{ route('admin.jenis-cuti.create') }}" class="btn btn-primary">
+        <i class="bi bi-plus-circle me-2"></i>Tambah Jenis Cuti
     </a>
 </div>
 
@@ -23,41 +24,40 @@
 @endif
 
 <div class="card">
-    <div class="card-header">
-        <div class="row">
-            <div class="col-md-6">
-                <input type="text" class="form-control" placeholder="Cari departemen...">
-            </div>
-        </div>
-    </div>
     <div class="card-body">
         <div class="table-responsive">
             <table class="table table-hover">
                 <thead>
                     <tr>
                         <th>No</th>
-                        <th>Nama Departemen</th>
-                        <th>Deskripsi</th>
-                        <th>Jumlah Karyawan</th>
+                        <th>Kode</th>
+                        <th>Nama Jenis Cuti</th>
+                        <th>Maksimal Hari</th>
+                        <th>Status Pembayaran</th>
                         <th>Aksi</th>
                     </tr>
                 </thead>
                 <tbody>
-                    @forelse($departemens as $index => $departemen)
+                    @forelse($jenisCutis as $index => $jenisCuti)
                     <tr>
-                        <td>{{ $departemens->firstItem() + $index }}</td>
-                        <td><span class="badge bg-info">{{ $departemen->kode_departemen }}</span></td>
-                        <td>{{ $departemen->nama_departemen }}</td>
-                        <td>{{ $departemen->karyawans_count }} Orang</td>
+                        <td>{{ $jenisCutis->firstItem() + $index }}</td>
+                        <td><span class="badge bg-info">{{ $jenisCuti->kode_cuti }}</span></td>
+                        <td>{{ $jenisCuti->nama_cuti }}</td>
+                        <td>{{ $jenisCuti->maksimal_hari ? $jenisCuti->maksimal_hari . ' hari' : 'Tidak ada batas' }}</td>
                         <td>
-                            <a href="{{ route('admin.departemen.show', $departemen->id) }}" class="btn btn-sm btn-info" title="Detail">
+                            <span class="badge bg-{{ $jenisCuti->is_dibayar ? 'success' : 'secondary' }}">
+                                {{ $jenisCuti->is_dibayar ? 'Dibayar' : 'Tidak Dibayar' }}
+                            </span>
+                        </td>
+                        <td>
+                            <a href="{{ route('admin.jenis-cuti.show', $jenisCuti->id) }}" class="btn btn-sm btn-info" title="Detail">
                                 <i class="bi bi-eye"></i>
                             </a>
-                            <a href="{{ route('admin.departemen.edit', $departemen->id) }}" class="btn btn-sm btn-warning" title="Edit">
+                            <a href="{{ route('admin.jenis-cuti.edit', $jenisCuti->id) }}" class="btn btn-sm btn-warning" title="Edit">
                                 <i class="bi bi-pencil"></i>
                             </a>
-                            <form action="{{ route('admin.departemen.destroy', $departemen->id) }}" method="POST" class="d-inline"
-                                  onsubmit="return confirm('Apakah Anda yakin ingin menghapus departemen ini?')">
+                            <form action="{{ route('admin.jenis-cuti.destroy', $jenisCuti->id) }}" method="POST" class="d-inline" 
+                                  onsubmit="return confirm('Apakah Anda yakin ingin menghapus jenis cuti ini?')">
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit" class="btn btn-sm btn-danger" title="Hapus">
@@ -68,7 +68,7 @@
                     </tr>
                     @empty
                     <tr>
-                        <td colspan="5" class="text-center">Belum ada data departemen</td>
+                        <td colspan="6" class="text-center">Belum ada data jenis cuti</td>
                     </tr>
                     @endforelse
                 </tbody>
@@ -76,7 +76,7 @@
         </div>
         
         <div class="mt-3">
-            {{ $departemens->links() }}
+            {{ $jenisCutis->links() }}
         </div>
     </div>
 </div>

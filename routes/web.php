@@ -2,6 +2,12 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\KaryawanController;
+use App\Http\Controllers\DepartemenController;
+use App\Http\Controllers\CutiController;
+use App\Http\Controllers\JenisCutiController;
+use App\Http\Controllers\PengaturanSistemController;
+use App\Http\Controllers\HrdController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -19,10 +25,35 @@ Route::middleware('auth:web,karyawan')->group(function () {
 });
 
 // Admin routes - menggunakan folder admin
-Route::middleware(['auth:web', 'role:admin'])->prefix('admin')->group(function () {
-    Route::get('/dashboard', function () {
-        return view('admin.dashboard');
-    })->name('admin.dashboard');
+Route::middleware(['auth:web', 'role:admin'])->prefix('admin')->name('admin.')->group(function () {
+    // Dashboard
+    Route::get('/dashboard', [DashboardController::class, 'adminDashboard'])->name('dashboard');
+
+    // Kelola Karyawan (Full CRUD with resource)
+    Route::resource('karyawan', KaryawanController::class);
+
+    // Kelola Departemen (Full CRUD with resource)
+    Route::resource('departemen', DepartemenController::class);
+
+    // Kelola Cuti
+    Route::get('cuti', [CutiController::class, 'index'])->name('cuti.index');
+    Route::get('cuti/{id}', [CutiController::class, 'show'])->name('cuti.show');
+    Route::put('cuti/{id}/status', [CutiController::class, 'updateStatus'])->name('cuti.updateStatus');
+    Route::delete('cuti/{id}', [CutiController::class, 'destroy'])->name('cuti.destroy');
+
+    // Kelola Jenis Cuti (Full CRUD with resource)
+    Route::resource('jenis-cuti', JenisCutiController::class);
+
+    // Kelola HRD - only index and show
+    Route::get('hrd', [HrdController::class, 'index'])->name('hrd.index');
+    Route::get('hrd/{id}', [HrdController::class, 'show'])->name('hrd.show');
+
+    // Laporan
+    Route::get('laporan', [App\Http\Controllers\LaporanController::class, 'index'])->name('laporan.index');
+
+    // Pengaturan Sistem
+    Route::get('pengaturan', [PengaturanSistemController::class, 'index'])->name('pengaturan.index');
+    Route::put('pengaturan', [PengaturanSistemController::class, 'update'])->name('pengaturan.update');
 });
 
 // HRD routes - menggunakan folder hrd

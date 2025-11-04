@@ -3,15 +3,15 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Laravel\Sanctum\HasApiTokens;
 
 class Karyawan extends Authenticatable
 {
-    use HasFactory;
+    use HasFactory, HasApiTokens;
 
     protected $table = 'karyawans';
-    
+
     protected $fillable = [
         'nip',
         'nama_depan',
@@ -48,19 +48,19 @@ class Karyawan extends Authenticatable
         return $this->belongsTo(Departemen::class, 'id_departemen');
     }
 
-    public function cutis()
+    public function cuti()
     {
-        return $this->hasMany(Cuti::class, 'id_karyawan');
+        return $this->hasMany(Cuti::class, 'karyawan_id');
+    }
+
+    public function sisaCutiTahunan()
+    {
+        return $this->hasMany(SisaCutiTahunan::class, 'karyawan_id');
     }
 
     public function notifikasis()
     {
         return $this->hasMany(Notifikasi::class, 'id_karyawan');
-    }
-
-    public function sisaCutiTahunan()
-    {
-        return $this->hasMany(SisaCutiTahunan::class, 'id_karyawan');
     }
 
     public function persetujuanCuti()

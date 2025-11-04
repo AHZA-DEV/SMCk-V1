@@ -1,3 +1,4 @@
+
 @extends('layouts.app')
 
 @section('content')
@@ -11,7 +12,7 @@
         <div class="card stat-card stat-card-blue">
             <div class="card-body">
                 <h6 class="card-subtitle mb-2">Total Karyawan</h6>
-                <h2 class="card-title">150</h2>
+                <h2 class="card-title">{{ $totalKaryawan }}</h2>
                 <p class="mb-0"><i class="bi bi-people"></i> Active Users</p>
             </div>
         </div>
@@ -21,7 +22,7 @@
         <div class="card stat-card stat-card-purple">
             <div class="card-body">
                 <h6 class="card-subtitle mb-2">Pengajuan Cuti</h6>
-                <h2 class="card-title">45</h2>
+                <h2 class="card-title">{{ $cutiPending }}</h2>
                 <p class="mb-0"><i class="bi bi-calendar-check"></i> Pending</p>
             </div>
         </div>
@@ -31,8 +32,8 @@
         <div class="card stat-card stat-card-indigo">
             <div class="card-body">
                 <h6 class="card-subtitle mb-2">Cuti Disetujui</h6>
-                <h2 class="card-title">320</h2>
-                <p class="mb-0"><i class="bi bi-check-circle"></i> This Month</p>
+                <h2 class="card-title">{{ $cutiDisetujui }}</h2>
+                <p class="mb-0"><i class="bi bi-check-circle"></i> Tahun Ini</p>
             </div>
         </div>
     </div>
@@ -41,7 +42,7 @@
         <div class="card stat-card stat-card-orange">
             <div class="card-body">
                 <h6 class="card-subtitle mb-2">Departemen</h6>
-                <h2 class="card-title">12</h2>
+                <h2 class="card-title">{{ $totalDepartemen }}</h2>
                 <p class="mb-0"><i class="bi bi-building"></i> Active</p>
             </div>
         </div>
@@ -55,10 +56,25 @@
                 <h5 class="mb-0">Statistik Cuti Bulanan</h5>
             </div>
             <div class="card-body">
-                <div class="sales-chart-placeholder" style="height: 300px;">
-                    <div class="d-flex align-items-center justify-content-center h-100">
-                        <p class="text-muted">Chart Area - Grafik Statistik Cuti</p>
-                    </div>
+                <div class="table-responsive">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>Bulan</th>
+                                <th>Disetujui</th>
+                                <th>Ditolak</th>
+                                <th>Pending</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Chart/Grafik akan ditambahkan nanti</td>
+                                <td>-</td>
+                                <td>-</td>
+                                <td>-</td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
@@ -70,27 +86,27 @@
                 <h5 class="mb-0">Pengajuan Terbaru</h5>
             </div>
             <div class="card-body">
+                @forelse($cutiTerbaru as $cuti)
                 <div class="order-item">
                     <div class="d-flex justify-content-between">
-                        <span>Budi Santoso</span>
-                        <span class="badge bg-warning">Pending</span>
+                        <span>{{ $cuti->karyawan->nama ?? 'N/A' }}</span>
+                        @if($cuti->status == 'pending')
+                            <span class="badge bg-warning">Pending</span>
+                        @elseif($cuti->status == 'disetujui')
+                            <span class="badge bg-success">Disetujui</span>
+                        @elseif($cuti->status == 'ditolak')
+                            <span class="badge bg-danger">Ditolak</span>
+                        @endif
                     </div>
-                    <small class="text-muted">Cuti Tahunan - 3 hari</small>
+                    <small class="text-muted">
+                        {{ $cuti->jenisCuti->nama_jenis ?? 'N/A' }} - 
+                        {{ \Carbon\Carbon::parse($cuti->tanggal_mulai)->diffInDays(\Carbon\Carbon::parse($cuti->tanggal_selesai)) + 1 }} hari
+                    </small>
+                    <small class="text-muted d-block">{{ $cuti->created_at->diffForHumans() }}</small>
                 </div>
-                <div class="order-item">
-                    <div class="d-flex justify-content-between">
-                        <span>Ani Wulandari</span>
-                        <span class="badge bg-success">Disetujui</span>
-                    </div>
-                    <small class="text-muted">Cuti Sakit - 2 hari</small>
-                </div>
-                <div class="order-item">
-                    <div class="d-flex justify-content-between">
-                        <span>Citra Dewi</span>
-                        <span class="badge bg-warning">Pending</span>
-                    </div>
-                    <small class="text-muted">Cuti Tahunan - 5 hari</small>
-                </div>
+                @empty
+                <p class="text-muted text-center">Belum ada pengajuan cuti</p>
+                @endforelse
             </div>
         </div>
     </div>

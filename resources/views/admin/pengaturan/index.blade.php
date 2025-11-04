@@ -38,56 +38,11 @@
 </div>
 
 <div class="card mt-4">
-    <div class="card-header">
+    <div class="card-header d-flex justify-content-between align-items-center">
         <h5 class="mb-0">Jenis Cuti</h5>
-    </div>
-    <div class="card-body">
-        <button class="btn btn-primary mb-3">
-            <i class="bi bi-plus-circle me-2"></i>Tambah Jenis Cuti
-        </button>
-        <div class="table-responsive">
-            <table class="table table-hover">
-                <thead>
-                    <tr>
-                        <th>No</th>
-                        <th>Nama Jenis Cuti</th>
-                        <th>Maksimal Hari</th>
-                        <th>Deskripsi</th>
-                        <th>Aksi</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>1</td>
-                        <td>Cuti Tahunan</td>
-                        <td>12 hari</td>
-                        <td>Cuti tahunan yang diberikan setiap tahun</td>
-                        <td>
-                            <button class="btn btn-sm btn-warning" title="Edit">
-                                <i class="bi bi-pencil"></i>
-                            </button>
-                            <button class="btn btn-sm btn-danger" title="Hapus">
-                                <i class="bi bi-trash"></i>
-                            </button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>2</td>
-                        <td>Cuti Sakit</td>
-                        <td>- </td>
-                        <td>Cuti karena sakit dengan surat dokter</td>
-                        <td>
-                            <button class="btn btn-sm btn-warning" title="Edit">
-                                <i class="bi bi-pencil"></i>
-                            </button>
-                            <button class="btn btn-sm btn-danger" title="Hapus">
-                                <i class="bi bi-trash"></i>
-                            </button>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
+        <a href="{{ route('admin.jenis-cuti.index') }}" class="btn btn-sm btn-primary">
+            Kelola Jenis Cuti <i class="bi bi-arrow-right ms-2"></i>
+        </a>
     </div>
 </div>
 @endsection

@@ -9,16 +9,22 @@ class Departemen extends Model
 {
     use HasFactory;
 
-    protected $table = 'departemens';
-    
     protected $fillable = [
-        'kode_departemen',
         'nama_departemen',
-        'deskripsi'
+        'kode_departemen',
+        'deskripsi',
     ];
 
+    /**
+     * Relasi ke Karyawan
+     * Satu departemen memiliki banyak karyawan
+     */
     public function karyawans()
     {
-        return $this->hasMany(Karyawan::class, 'id_departemen');
+        return $this->hasMany(Karyawan::class, 'departemen_id');
+    }
+
+    public function karyawan() {
+        return $this->belongsTo(Karyawan::class, 'departemen_id');
     }
 }

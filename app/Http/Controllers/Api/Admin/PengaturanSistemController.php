@@ -1,9 +1,11 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api\Admin;
 
+use App\Http\Controllers\Controller;
 use App\Models\PengaturanSistem;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class PengaturanSistemController extends Controller
 {
@@ -19,22 +21,35 @@ class PengaturanSistemController extends Controller
             ]);
         }
 
-        return view('admin.pengaturan.index', compact('pengaturan'));
+        return response()->json([
+            'success' => true,
+            'data' => $pengaturan
+        ]);
     }
 
     public function update(Request $request)
     {
         $pengaturan = PengaturanSistem::first();
 
-        $validated = $request->validate([
+        $validator = Validator::make($request->all(), [
             'nama_aplikasi' => 'required|string|max:255',
             'jumlah_cuti_tahunan' => 'required|integer|min:1',
             'email_notifikasi' => 'required|email',
         ]);
 
-        $pengaturan->update($validated);
+        if ($validator->fails()) {
+            return response()->json([
+                'success' => false,
+                'errors' => $validator->errors()
+            ], 422);
+        }
 
-        return redirect()->route('admin.pengaturan.index')
-            ->with('success', 'Pengaturan sistem berhasil diupdate');
+        $pengaturan->update($validator->validated());
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Pengaturan sistem berhasil diupdate',
+            'data' => $pengaturan
+        ]);
     }
 }
