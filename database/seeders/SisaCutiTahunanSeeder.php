@@ -7,26 +7,31 @@ use App\Models\SisaCutiTahunan;
 
 class SisaCutiTahunanSeeder extends Seeder
 {
+    /**
+     * Run the database seeds.
+     *
+     * @return void
+     */
     public function run()
     {
         $sisaCutis = [
             [
-                'id_karyawan' => 2,
+                'karyawan_id' => 2,
                 'tahun' => 2023,
                 'sisa_cuti' => 10
             ],
             [
-                'id_karyawan' => 3,
+                'karyawan_id' => 3,
                 'tahun' => 2023,
                 'sisa_cuti' => 8
             ],
             [
-                'id_karyawan' => 4,
+                'karyawan_id' => 4,
                 'tahun' => 2023,
                 'sisa_cuti' => 5
             ],
             [
-                'id_karyawan' => 5,
+                'karyawan_id' => 5,
                 'tahun' => 2023,
                 'sisa_cuti' => 12
             ]

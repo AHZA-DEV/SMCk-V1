@@ -10,9 +10,9 @@ class SisaCutiTahunan extends Model
     use HasFactory;
 
     protected $table = 'sisa_cuti_tahunans';
-    
+
     protected $fillable = [
-        'id_karyawan',
+        'karyawan_id',
         'tahun',
         'sisa_cuti'
     ];
@@ -23,6 +23,6 @@ class SisaCutiTahunan extends Model
 
     public function karyawan()
     {
-        return $this->belongsTo(Karyawan::class, 'id_karyawan');
+        return $this->belongsTo(Karyawan::class, 'karyawan_id');
     }
 }

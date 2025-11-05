@@ -10,9 +10,26 @@
         </div>
     </div>
 
+    @if(session('success'))
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        {{ session('success') }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+    </div>
+    @endif
+
     <div class="card">
         <div class="card-header">
-            <h5 class="mb-0">Riwayat Pengajuan Cuti</h5>
+            <div class="d-flex justify-content-between align-items-center">
+                <h5 class="mb-0">Riwayat Pengajuan Cuti</h5>
+                <div>
+                    <form method="GET" action="{{ route('hrd.riwayat-cuti.index') }}" class="d-inline">
+                        <input type="text" name="search" class="form-control form-control-sm d-inline" style="width: 250px;" placeholder="Cari nama karyawan..." value="{{ request('search') }}">
+                        <button type="submit" class="btn btn-primary btn-sm">
+                            <i class="bi bi-search"></i>
+                        </button>
+                    </form>
+                </div>
+            </div>
         </div>
         <div class="card-body">
             <div class="table-responsive">
@@ -27,31 +44,43 @@
                             <th>Status</th>
                             <th>Disetujui Oleh</th>
                             <th>Tanggal Persetujuan</th>
+                            <th>Aksi</th>
                         </tr>
                     </thead>
                     <tbody>
+                        @forelse($cutis as $index => $cuti)
                         <tr>
-                            <td>1</td>
-                            <td>Budi Santoso</td>
-                            <td>Cuti Tahunan</td>
-                            <td>15/10/2025 - 17/10/2025</td>
-                            <td>3 hari</td>
-                            <td><span class="badge bg-success">Disetujui</span></td>
-                            <td>Ani Wulandari</td>
-                            <td>14/10/2025</td>
+                            <td>{{ $cutis->firstItem() + $index }}</td>
+                            <td>{{ $cuti->karyawan->nama }}</td>
+                            <td>{{ $cuti->jenisCuti->nama_cuti }}</td>
+                            <td>{{ \Carbon\Carbon::parse($cuti->tanggal_mulai)->format('d/m/Y') }} - {{ \Carbon\Carbon::parse($cuti->tanggal_selesai)->format('d/m/Y') }}</td>
+                            <td>{{ $cuti->jumlah_hari }} hari</td>
+                            <td>
+                                @if($cuti->status == 'disetujui')
+                                    <span class="badge bg-success">Disetujui</span>
+                                @else
+                                    <span class="badge bg-danger">Ditolak</span>
+                                @endif
+                            </td>
+                            <td>{{ $cuti->disetujui_oleh ?? '-' }}</td>
+                            <td>{{ $cuti->tanggal_approve ? \Carbon\Carbon::parse($cuti->tanggal_approve)->format('d/m/Y') : '-' }}</td>
+                            <td>
+                                <a href="{{ route('hrd.riwayat-cuti.show', $cuti->id) }}" class="btn btn-sm btn-info" title="Detail">
+                                    <i class="bi bi-eye"></i>
+                                </a>
+                            </td>
                         </tr>
+                        @empty
                         <tr>
-                            <td>2</td>
-                            <td>Citra Dewi</td>
-                            <td>Cuti Sakit</td>
-                            <td>20/09/2025 - 21/09/2025</td>
-                            <td>2 hari</td>
-                            <td><span class="badge bg-success">Disetujui</span></td>
-                            <td>Ani Wulandari</td>
-                            <td>19/09/2025</td>
+                            <td colspan="9" class="text-center">Tidak ada riwayat cuti</td>
                         </tr>
+                        @endforelse
                     </tbody>
                 </table>
+            </div>
+
+            <div class="mt-3">
+                {{ $cutis->links() }}
             </div>
         </div>
     </div>

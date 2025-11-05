@@ -21,10 +21,6 @@ class Departemen extends Model
      */
     public function karyawans()
     {
-        return $this->hasMany(Karyawan::class, 'departemen_id');
-    }
-
-    public function karyawan() {
-        return $this->belongsTo(Karyawan::class, 'departemen_id');
+        return $this->hasMany(Karyawan::class, 'id_departemen');
     }
 }

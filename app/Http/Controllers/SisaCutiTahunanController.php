@@ -1,10 +1,28 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Models;
 
-use Illuminate\Http\Request;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
 
-class SisaCutiTahunanController extends Controller
+class SisaCutiTahunan extends Model
 {
-    //
+    use HasFactory;
+
+    protected $table = 'sisa_cuti_tahunans';
+
+    protected $fillable = [
+        'karyawan_id',
+        'tahun',
+        'sisa_cuti'
+    ];
+
+    protected $casts = [
+        'tahun' => 'integer',
+    ];
+
+    public function karyawan()
+    {
+        return $this->belongsTo(Karyawan::class, 'karyawan_id');
+    }
 }

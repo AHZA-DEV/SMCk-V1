@@ -57,10 +57,50 @@ Route::middleware(['auth:web', 'role:admin'])->prefix('admin')->name('admin.')->
 });
 
 // HRD routes - menggunakan folder hrd
-Route::middleware(['auth:karyawan', 'role:hrd'])->prefix('hrd')->group(function () {
-    Route::get('/dashboard', function () {
-        return view('hrd.dashboard');
-    })->name('hrd.dashboard');
+Route::middleware(['auth:karyawan', 'role:hrd'])->prefix('hrd')->name('hrd.')->group(function () {
+    // Dashboard
+    Route::get('/dashboard', [App\Http\Controllers\Hrd\DashboardController::class, 'index'])->name('dashboard');
+
+    // Approval Cuti
+    Route::prefix('approval-cuti')->name('approval-cuti.')->group(function () {
+        Route::get('/', [App\Http\Controllers\Hrd\ApprovalCutiController::class, 'index'])->name('index');
+        Route::get('/{id}', [App\Http\Controllers\Hrd\ApprovalCutiController::class, 'show'])->name('show');
+        Route::post('/{id}/approve', [App\Http\Controllers\Hrd\ApprovalCutiController::class, 'approve'])->name('approve');
+        Route::post('/{id}/reject', [App\Http\Controllers\Hrd\ApprovalCutiController::class, 'reject'])->name('reject');
+    });
+
+    // Data Karyawan
+    Route::prefix('data-karyawan')->name('data-karyawan.')->group(function () {
+        Route::get('/', [App\Http\Controllers\Hrd\DataKaryawanController::class, 'index'])->name('index');
+        Route::get('/create', [App\Http\Controllers\Hrd\DataKaryawanController::class, 'create'])->name('create');
+        Route::post('/', [App\Http\Controllers\Hrd\DataKaryawanController::class, 'store'])->name('store');
+        Route::get('/{id}', [App\Http\Controllers\Hrd\DataKaryawanController::class, 'show'])->name('show');
+        Route::get('/{id}/edit', [App\Http\Controllers\Hrd\DataKaryawanController::class, 'edit'])->name('edit');
+        Route::put('/{id}', [App\Http\Controllers\Hrd\DataKaryawanController::class, 'update'])->name('update');
+        Route::delete('/{id}', [App\Http\Controllers\Hrd\DataKaryawanController::class, 'destroy'])->name('destroy');
+    });
+
+    // Pengajuan Cuti
+    Route::prefix('pengajuan-cuti')->name('pengajuan-cuti.')->group(function () {
+        Route::get('/', [App\Http\Controllers\Hrd\PengajuanCutiController::class, 'index'])->name('index');
+        Route::get('/{id}', [App\Http\Controllers\Hrd\PengajuanCutiController::class, 'show'])->name('show');
+    });
+
+    // Riwayat Cuti
+    Route::prefix('riwayat-cuti')->name('riwayat-cuti.')->group(function () {
+        Route::get('/', [App\Http\Controllers\Hrd\RiwayatCutiController::class, 'index'])->name('index');
+        Route::get('/{id}', [App\Http\Controllers\Hrd\RiwayatCutiController::class, 'show'])->name('show');
+    });
+
+    // Laporan
+    Route::get('/laporan', [App\Http\Controllers\Hrd\LaporanController::class, 'index'])->name('laporan.index');
+
+    // Profil
+    Route::prefix('profil')->name('profil.')->group(function () {
+        Route::get('/', [App\Http\Controllers\Hrd\ProfilController::class, 'index'])->name('index');
+        Route::put('/', [App\Http\Controllers\Hrd\ProfilController::class, 'update'])->name('update');
+        Route::put('/password', [App\Http\Controllers\Hrd\ProfilController::class, 'updatePassword'])->name('update-password');
+    });
 });
 
 // Karyawan routes - menggunakan folder karyawan

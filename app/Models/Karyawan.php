@@ -14,6 +14,7 @@ class Karyawan extends Authenticatable
 
     protected $fillable = [
         'nip',
+        'nama',
         'nama_depan',
         'nama_belakang',
         'email',
@@ -41,6 +42,15 @@ class Karyawan extends Authenticatable
     {
         return $this->nama_depan . ' ' . $this->nama_belakang;
     }
+    
+    // Accessor untuk nama (untuk kompatibilitas)
+    public function getNamaAttribute($value)
+    {
+        if ($value) {
+            return $value;
+        }
+        return $this->nama_depan . ' ' . $this->nama_belakang;
+    }
 
     // Relationships
     public function departemen()
@@ -50,7 +60,7 @@ class Karyawan extends Authenticatable
 
     public function cuti()
     {
-        return $this->hasMany(Cuti::class, 'karyawan_id');
+        return $this->hasMany(Cuti::class, 'id_karyawan');
     }
 
     public function sisaCutiTahunan()

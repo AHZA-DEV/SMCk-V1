@@ -28,21 +28,21 @@ class AuthController extends Controller
 
         // Cek apakah user adalah admin (dari users table)
         $admin = User::where('email', $request->email)->first();
-        
+
         if ($admin && Hash::check($request->password, $admin->password)) {
             Auth::guard('web')->login($admin);
             $request->session()->regenerate();
-            
+
             return redirect()->route('admin.dashboard')->with('success', 'Login berhasil sebagai Admin');
         }
 
         // Cek apakah user adalah karyawan/hrd (dari karyawans table)
         $karyawan = Karyawan::where('email', $request->email)->first();
-        
+
         if ($karyawan && Hash::check($request->password, $karyawan->password)) {
             Auth::guard('karyawan')->login($karyawan);
             $request->session()->regenerate();
-            
+
             // Redirect berdasarkan role
             if ($karyawan->peran === 'hrd') {
                 return redirect()->route('hrd.dashboard')->with('success', 'Login berhasil sebagai HRD');
@@ -59,17 +59,14 @@ class AuthController extends Controller
     // Logout
     public function logout(Request $request)
     {
-        // Check which guard is authenticated and logout
-        if (Auth::guard('web')->check()) {
-            Auth::guard('web')->logout();
-        } elseif (Auth::guard('karyawan')->check()) {
-            Auth::guard('karyawan')->logout();
-        }
+        // Logout dari semua guard
+        Auth::guard('web')->logout();
+        Auth::guard('karyawan')->logout();
 
         $request->session()->invalidate();
         $request->session()->regenerateToken();
 
-        return redirect('/login')->with('success', 'Logout berhasil');
+        return redirect()->route('login')->with('success', 'Anda berhasil logout');
     }
 
     // Get authenticated user info
@@ -89,7 +86,7 @@ class AuthController extends Controller
                 'guard' => 'karyawan'
             ];
         }
-        
+
         return null;
     }
 }

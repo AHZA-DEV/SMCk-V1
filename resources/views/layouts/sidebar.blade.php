@@ -81,45 +81,45 @@
                 </a>
             </li>
 
+            <li class="menu-item {{ Request::is('hrd/data-karyawan*') ? 'active' : '' }}">
+                <a href="{{ route('hrd.data-karyawan.index') }}" class="menu-link">
+                    <i class="bi bi-people"></i>
+                    <span>Data Karyawan</span>
+                </a>
+            </li>
+
             <li class="menu-item {{ Request::is('hrd/pengajuan-cuti*') ? 'active' : '' }}">
-                <a href="#" class="menu-link">
+                <a href="{{ route('hrd.pengajuan-cuti.index') }}" class="menu-link">
                     <i class="bi bi-inbox"></i>
                     <span>Pengajuan Cuti</span>
                 </a>
             </li>
 
-            <li class="menu-item {{ Request::is('hrd/approval*') ? 'active' : '' }}">
-                <a href="#" class="menu-link">
+            <li class="menu-item {{ Request::is('hrd/approval-cuti*') ? 'active' : '' }}">
+                <a href="{{ route('hrd.approval-cuti.index') }}" class="menu-link">
                     <i class="bi bi-check-circle"></i>
                     <span>Approval Cuti</span>
                 </a>
             </li>
 
             <li class="menu-item {{ Request::is('hrd/riwayat-cuti*') ? 'active' : '' }}">
-                <a href="#" class="menu-link">
+                <a href="{{ route('hrd.riwayat-cuti.index') }}" class="menu-link">
                     <i class="bi bi-clock-history"></i>
                     <span>Riwayat Cuti</span>
                 </a>
             </li>
 
-            <li class="menu-item {{ Request::is('hrd/karyawan*') ? 'active' : '' }}">
-                <a href="#" class="menu-link">
-                    <i class="bi bi-people"></i>
-                    <span>Data Karyawan</span>
-                </a>
-            </li>
-
             <li class="menu-item {{ Request::is('hrd/laporan*') ? 'active' : '' }}">
-                <a href="#" class="menu-link">
+                <a href="{{ route('hrd.laporan.index') }}" class="menu-link">
                     <i class="bi bi-file-earmark-text"></i>
                     <span>Laporan</span>
                 </a>
             </li>
 
             <li class="menu-item {{ Request::is('hrd/profil*') ? 'active' : '' }}">
-                <a href="#" class="menu-link">
-                    <i class="bi bi-person-circle"></i>
-                    <span>Profil Saya</span>
+                <a href="{{ route('hrd.profil.index') }}" class="menu-link">
+                    <i class="bi bi-person"></i>
+                    <span>Profil</span>
                 </a>
             </li>
         </ul>
