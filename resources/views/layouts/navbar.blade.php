@@ -19,13 +19,16 @@
                         </button>
                         
                         <div class="dropdown me-3">
-                            <button class="btn btn-link position-relative" data-bs-toggle="dropdown">
+                            <a href="{{ url('karyawan/notifikasi') }}" class="btn btn-link position-relative">
                                 <i class="bi bi-bell"></i>
+                                @if(isset($jumlah_notifikasi) && $jumlah_notifikasi > 0)
                                 <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
-                                    3
+                                    {{ $jumlah_notifikasi }}
                                 </span>
-                            </button>
+                                @endif
+                            </a>
                         </div>
+
                         
                         <div class="dropdown">
                             <button class="btn btn-link d-flex align-items-center" data-bs-toggle="dropdown" aria-expanded="false">

@@ -10,7 +10,7 @@ class RiwayatCutiController extends Controller
 {
     public function index(Request $request)
     {
-        $query = Cuti::with(['karyawan.departemen', 'jenisCuti'])
+        $query = Cuti::with(['karyawan.departemen', 'jenisCuti', 'disetujuiOleh'])
             ->whereIn('status', ['disetujui', 'ditolak']);
 
         if ($request->has('search') && $request->search != '') {
@@ -26,7 +26,7 @@ class RiwayatCutiController extends Controller
 
     public function show($id)
     {
-        $cuti = Cuti::with(['karyawan.departemen', 'jenisCuti'])->findOrFail($id);
+        $cuti = Cuti::with(['karyawan.departemen', 'jenisCuti', 'disetujuiOleh'])->findOrFail($id);
         return view('hrd.riwayat-cuti.show', compact('cuti'));
     }
 }

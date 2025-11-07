@@ -49,6 +49,35 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::get('laporan', [App\Http\Controllers\Api\Admin\LaporanController::class, 'index']);
         Route::post('laporan/export', [App\Http\Controllers\Api\Admin\LaporanController::class, 'export']);
     });
+
+    // HRD routes
+    Route::prefix('hrd')->group(function () {
+        // Dashboard
+        Route::get('dashboard', [App\Http\Controllers\Api\Hrd\DashboardController::class, 'index']);
+        
+        // Approval Cuti
+        Route::get('approval-cuti', [App\Http\Controllers\Api\Hrd\ApprovalCutiController::class, 'index']);
+        Route::get('approval-cuti/{id}', [App\Http\Controllers\Api\Hrd\ApprovalCutiController::class, 'show']);
+        Route::post('approval-cuti/{id}/approve', [App\Http\Controllers\Api\Hrd\ApprovalCutiController::class, 'approve']);
+        Route::post('approval-cuti/{id}/reject', [App\Http\Controllers\Api\Hrd\ApprovalCutiController::class, 'reject']);
+        
+        // Data Karyawan
+        Route::get('data-karyawan', [App\Http\Controllers\Api\Hrd\DataKaryawanController::class, 'index']);
+        Route::get('data-karyawan/{id}', [App\Http\Controllers\Api\Hrd\DataKaryawanController::class, 'show']);
+        
+        // Riwayat Cuti
+        Route::get('riwayat-cuti', [App\Http\Controllers\Api\Hrd\RiwayatCutiController::class, 'index']);
+        Route::get('riwayat-cuti/{id}', [App\Http\Controllers\Api\Hrd\RiwayatCutiController::class, 'show']);
+        
+        // Laporan
+        Route::get('laporan', [App\Http\Controllers\Api\Hrd\LaporanController::class, 'index']);
+        Route::post('laporan/export', [App\Http\Controllers\Api\Hrd\LaporanController::class, 'export']);
+        
+        // Profil
+        Route::get('profil', [App\Http\Controllers\Api\Hrd\ProfilController::class, 'index']);
+        Route::put('profil', [App\Http\Controllers\Api\Hrd\ProfilController::class, 'update']);
+        Route::put('profil/password', [App\Http\Controllers\Api\Hrd\ProfilController::class, 'updatePassword']);
+    });
 });
 
 

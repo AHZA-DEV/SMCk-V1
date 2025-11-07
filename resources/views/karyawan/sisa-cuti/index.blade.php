@@ -1,6 +1,12 @@
 
 @extends('layouts.app')
 
+@push('styles')
+<!-- DataTables CSS -->
+<link href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap5.min.css" rel="stylesheet">
+<link href="https://cdn.datatables.net/buttons/2.4.1/css/buttons.bootstrap5.min.css" rel="stylesheet">
+@endpush
+
 @section('content')
 <div class="container-fluid">
     <div class="row mb-4">
@@ -48,7 +54,7 @@
         </div>
         <div class="card-body">
             <div class="table-responsive">
-                <table class="table table-hover">
+                <table id="cutiTable" class="table table-hover">
                     <thead class="table-light">
                         <tr>
                             <th>Jenis Cuti</th>
@@ -85,13 +91,81 @@
             <h5 class="mb-0">Informasi</h5>
         </div>
         <div class="card-body">
-            <ul class="mb-0">
-                <li>Jatah cuti tahunan adalah 12 hari per tahun</li>
-                <li>Sisa cuti yang tidak digunakan tidak dapat dibawa ke tahun berikutnya</li>
-                <li>Cuti sakit dan cuti darurat tidak mengurangi jatah cuti tahunan</li>
-                <li>Pengajuan cuti harus dilakukan minimal 3 hari sebelum tanggal mulai cuti</li>
-            </ul>
+            <p class="mb-1">- Jatah cuti tahunan adalah 12 hari per tahun</p>
+            <p class="mb-1">- Sisa cuti yang tidak digunakan tidak dapat dibawa ke tahun berikutnya</p>
+            <p class="mb-1">- Cuti sakit dan cuti darurat tidak mengurangi jatah cuti tahunan</p>
+            <p class="mb-0">- Pengajuan cuti harus dilakukan minimal 3 hari sebelum tanggal mulai cuti</p>
         </div>
     </div>
 </div>
 @endsection
+
+@push('scripts')
+<!-- jQuery -->
+<script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+<!-- DataTables JS -->
+<script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap5.min.js"></script>
+<!-- DataTables Buttons -->
+<script src="https://cdn.datatables.net/buttons/2.4.1/js/dataTables.buttons.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/2.4.1/js/buttons.bootstrap5.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/pdfmake.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/vfs_fonts.js"></script>
+<script src="https://cdn.datatables.net/buttons/2.4.1/js/buttons.html5.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/2.4.1/js/buttons.print.min.js"></script>
+
+<script>
+$(document).ready(function() {
+    $('#cutiTable').DataTable({
+        dom: 'Bfrtip',
+        buttons: [
+            {
+                extend: 'excelHtml5',
+                text: '<i class="bi bi-file-excel"></i> Export Excel',
+                className: 'btn btn-success btn-sm',
+                title: 'Data Sisa Cuti - {{ Auth::guard("karyawan")->user()->nama_depan }} {{ Auth::guard("karyawan")->user()->nama_belakang }}',
+                exportOptions: {
+                    columns: ':visible'
+                }
+            },
+            {
+                extend: 'pdfHtml5',
+                text: '<i class="bi bi-file-pdf"></i> Export PDF',
+                className: 'btn btn-danger btn-sm',
+                title: 'Data Sisa Cuti - {{ Auth::guard("karyawan")->user()->nama_depan }} {{ Auth::guard("karyawan")->user()->nama_belakang }}',
+                exportOptions: {
+                    columns: ':visible'
+                }
+            },
+            {
+                extend: 'print',
+                text: '<i class="bi bi-printer"></i> Print',
+                className: 'btn btn-info btn-sm',
+                title: 'Data Sisa Cuti - {{ Auth::guard("karyawan")->user()->nama_depan }} {{ Auth::guard("karyawan")->user()->nama_belakang }}',
+                exportOptions: {
+                    columns: ':visible'
+                }
+            }
+        ],
+        language: {
+            search: "Pencarian:",
+            lengthMenu: "Tampilkan _MENU_ data per halaman",
+            zeroRecords: "Data tidak ditemukan",
+            info: "Menampilkan halaman _PAGE_ dari _PAGES_",
+            infoEmpty: "Tidak ada data tersedia",
+            infoFiltered: "(difilter dari _MAX_ total data)",
+            paginate: {
+                first: "Pertama",
+                last: "Terakhir",
+                next: "Selanjutnya",
+                previous: "Sebelumnya"
+            }
+        },
+        paging: false,
+        searching: false,
+        info: false
+    });
+});
+</script>
+@endpush

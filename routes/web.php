@@ -104,10 +104,34 @@ Route::middleware(['auth:karyawan', 'role:hrd'])->prefix('hrd')->name('hrd.')->g
 });
 
 // Karyawan routes - menggunakan folder karyawan
-Route::middleware(['auth:karyawan', 'role:karyawan'])->prefix('karyawan')->group(function () {
-    Route::get('/dashboard', function () {
-        return view('karyawan.dashboard');
-    })->name('karyawan.dashboard');
+Route::middleware(['auth:karyawan', 'role:karyawan'])->prefix('karyawan')->name('karyawan.')->group(function () {
+    // Dashboard
+    Route::get('/dashboard', [App\Http\Controllers\Karyawan\DashboardController::class, 'index'])->name('dashboard');
+    
+    // Ajukan Cuti
+    Route::prefix('ajukan-cuti')->name('ajukan-cuti.')->group(function () {
+        Route::get('/', [App\Http\Controllers\Karyawan\AjukanCutiController::class, 'index'])->name('index');
+        Route::post('/', [App\Http\Controllers\Karyawan\AjukanCutiController::class, 'store'])->name('store');
+    });
+    
+    // Riwayat Cuti
+    Route::prefix('riwayat-cuti')->name('riwayat-cuti.')->group(function () {
+        Route::get('/', [App\Http\Controllers\Karyawan\RiwayatCutiController::class, 'index'])->name('index');
+        Route::get('/{id}', [App\Http\Controllers\Karyawan\RiwayatCutiController::class, 'show'])->name('show');
+    });
+    
+    // Sisa Cuti
+    Route::get('/sisa-cuti', [App\Http\Controllers\Karyawan\SisaCutiController::class, 'index'])->name('sisa-cuti.index');
+    
+    // Notifikasi
+    Route::get('/notifikasi', [App\Http\Controllers\Karyawan\NotifikasiController::class, 'index'])->name('notifikasi.index');
+    
+    // Profil
+    Route::prefix('profil')->name('profil.')->group(function () {
+        Route::get('/', [App\Http\Controllers\Karyawan\ProfilController::class, 'index'])->name('index');
+        Route::put('/', [App\Http\Controllers\Karyawan\ProfilController::class, 'update'])->name('update');
+        Route::put('/password', [App\Http\Controllers\Karyawan\ProfilController::class, 'updatePassword'])->name('update-password');
+    });
 });
 
 // Root redirect

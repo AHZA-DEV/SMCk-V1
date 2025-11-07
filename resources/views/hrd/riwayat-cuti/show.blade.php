@@ -65,7 +65,7 @@
                         </tr>
                         <tr>
                             <th>Disetujui Oleh</th>
-                            <td>{{ $cuti->disetujui_oleh ?? '-' }}</td>
+                            <td>{{ $cuti->disetujuiOleh->nama ?? '-' }}</td>
                         </tr>
                         <tr>
                             <th>Tanggal Persetujuan</th>

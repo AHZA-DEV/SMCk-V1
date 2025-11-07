@@ -146,35 +146,43 @@
             </li>
 
             <li class="menu-item {{ Request::is('karyawan/ajukan-cuti*') ? 'active' : '' }}">
-                <a href="#" class="menu-link">
+                <a href="{{ route('karyawan.ajukan-cuti.index') }}" class="menu-link">
                     <i class="bi bi-calendar-plus"></i>
                     <span>Ajukan Cuti</span>
                 </a>
             </li>
 
             <li class="menu-item {{ Request::is('karyawan/riwayat-cuti*') ? 'active' : '' }}">
-                <a href="#" class="menu-link">
+                <a href="{{ route('karyawan.riwayat-cuti.index') }}" class="menu-link">
                     <i class="bi bi-clock-history"></i>
                     <span>Riwayat Cuti</span>
                 </a>
             </li>
 
             <li class="menu-item {{ Request::is('karyawan/sisa-cuti*') ? 'active' : '' }}">
-                <a href="#" class="menu-link">
+                <a href="{{ route('karyawan.sisa-cuti.index') }}" class="menu-link">
                     <i class="bi bi-calendar-event"></i>
                     <span>Sisa Cuti</span>
                 </a>
             </li>
 
             <li class="menu-item {{ Request::is('karyawan/notifikasi*') ? 'active' : '' }}">
-                <a href="#" class="menu-link">
+                <a href="{{ route('karyawan.notifikasi.index') }}" class="menu-link">
                     <i class="bi bi-bell"></i>
                     <span>Notifikasi</span>
+                    @php
+                        $unreadCount = \App\Models\Notifikasi::where('karyawan_id', Auth::guard('karyawan')->user()->id)
+                            ->where('dibaca', false)
+                            ->count();
+                    @endphp
+                    @if($unreadCount > 0)
+                        <span class="badge bg-danger rounded-pill ms-auto">{{ $unreadCount }}</span>
+                    @endif
                 </a>
             </li>
 
             <li class="menu-item {{ Request::is('karyawan/profil*') ? 'active' : '' }}">
-                <a href="#" class="menu-link">
+                <a href="{{ route('karyawan.profil.index') }}" class="menu-link">
                     <i class="bi bi-person-circle"></i>
                     <span>Profil Saya</span>
                 </a>

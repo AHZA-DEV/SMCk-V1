@@ -62,7 +62,7 @@
                                     <span class="badge bg-danger">Ditolak</span>
                                 @endif
                             </td>
-                            <td>{{ $cuti->disetujui_oleh ?? '-' }}</td>
+                            <td>{{ $cuti->disetujuiOleh->nama ?? '-' }}</td>
                             <td>{{ $cuti->tanggal_approve ? \Carbon\Carbon::parse($cuti->tanggal_approve)->format('d/m/Y') : '-' }}</td>
                             <td>
                                 <a href="{{ route('hrd.riwayat-cuti.show', $cuti->id) }}" class="btn btn-sm btn-info" title="Detail">
