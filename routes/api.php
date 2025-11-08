@@ -8,6 +8,8 @@ use App\Http\Controllers\Api\Admin\DepartemenController;
 use App\Http\Controllers\Api\Admin\CutiController;
 use App\Http\Controllers\Api\Admin\JenisCutiController;
 use App\Http\Controllers\Api\Admin\PengaturanSistemController;
+use App\Http\Controllers\Api\Karyawan\NotifikasiController;
+use App\Http\Controllers\Api\Karyawan\RiwayatCutiController;
 use Illuminate\Support\Facades\Route;
 
 // Public routes
@@ -77,6 +79,19 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::get('profil', [App\Http\Controllers\Api\Hrd\ProfilController::class, 'index']);
         Route::put('profil', [App\Http\Controllers\Api\Hrd\ProfilController::class, 'update']);
         Route::put('profil/password', [App\Http\Controllers\Api\Hrd\ProfilController::class, 'updatePassword']);
+    });
+
+    // Karyawan routes
+    Route::prefix('karyawan')->group(function () {
+        // Notifikasi
+        Route::get('notifikasi', [NotifikasiController::class, 'index']);
+        Route::put('notifikasi/{id}/read', [NotifikasiController::class, 'markAsRead']);
+        Route::put('notifikasi/read-all', [NotifikasiController::class, 'markAllAsRead']);
+        Route::get('notifikasi/unread-count', [NotifikasiController::class, 'unreadCount']);
+
+        // Riwayat Cuti
+        Route::get('riwayat-cuti', [RiwayatCutiController::class, 'index']);
+        Route::get('riwayat-cuti/{id}', [RiwayatCutiController::class, 'show']);
     });
 });
 
