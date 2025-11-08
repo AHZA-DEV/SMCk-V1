@@ -9,9 +9,6 @@
                     <h2>Data Karyawan</h2>
                     <p class="text-muted">Informasi karyawan dan sisa cuti</p>
                 </div>
-                <a href="{{ route('hrd.data-karyawan.create') }}" class="btn btn-primary">
-                    <i class="bi bi-plus-circle"></i> Tambah Karyawan
-                </a>
             </div>
         </div>
     </div>

@@ -9,7 +9,7 @@
 
 <div class="row g-4 mb-4">
     <div class="col-md-3">
-        <div class="card stat-card stat-card-blue">
+        <div class="card ">
             <div class="card-body">
                 <h6 class="card-subtitle mb-2">Total Karyawan</h6>
                 <h2 class="card-title">{{ $totalKaryawan }}</h2>
@@ -19,7 +19,7 @@
     </div>
     
     <div class="col-md-3">
-        <div class="card stat-card stat-card-purple">
+        <div class="card">
             <div class="card-body">
                 <h6 class="card-subtitle mb-2">Pengajuan Cuti</h6>
                 <h2 class="card-title">{{ $cutiPending }}</h2>
@@ -29,7 +29,7 @@
     </div>
     
     <div class="col-md-3">
-        <div class="card stat-card stat-card-indigo">
+        <div class="card">
             <div class="card-body">
                 <h6 class="card-subtitle mb-2">Cuti Disetujui</h6>
                 <h2 class="card-title">{{ $cutiDisetujui }}</h2>
@@ -39,7 +39,7 @@
     </div>
     
     <div class="col-md-3">
-        <div class="card stat-card stat-card-orange">
+        <div class="card">
             <div class="card-body">
                 <h6 class="card-subtitle mb-2">Departemen</h6>
                 <h2 class="card-title">{{ $totalDepartemen }}</h2>

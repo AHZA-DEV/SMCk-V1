@@ -3,15 +3,17 @@
 namespace App\Http\Controllers\Karyawan;
 
 use App\Http\Controllers\Controller;
+use App\Models\Karyawan;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
 
 class ProfilController extends Controller
 {
     public function index()
     {
-        /** @var \App\Models\Karyawan $karyawan */
+        /** @var Karyawan $karyawan */
         $karyawan = Auth::guard('karyawan')->user();
         
         return view('karyawan.profil.index', compact('karyawan'));
@@ -19,7 +21,7 @@ class ProfilController extends Controller
     
     public function update(Request $request)
     {
-        /** @var \App\Models\Karyawan $karyawan */
+        /** @var Karyawan $karyawan */
         $karyawan = Auth::guard('karyawan')->user();
         
         $validated = $request->validate([
@@ -27,8 +29,20 @@ class ProfilController extends Controller
             'nama_belakang' => 'required|string|max:255',
             'email' => 'required|email|unique:karyawans,email,' . $karyawan->id,
             'no_telepon' => 'nullable|string|max:20',
-            'alamat' => 'nullable|string'
+            'alamat' => 'nullable|string',
+            'foto_profil' => 'nullable|image|mimes:jpeg,jpg,png|max:2048'
         ]);
+        
+        // Handle foto profil upload
+        if ($request->hasFile('foto_profil')) {
+            // Delete old photo if exists
+            if ($karyawan->foto_profil) {
+                Storage::disk('public')->delete($karyawan->foto_profil);
+            }
+            
+            $path = $request->file('foto_profil')->store('foto_profil', 'public');
+            $validated['foto_profil'] = $path;
+        }
         
         $karyawan->update($validated);
         
@@ -43,7 +57,7 @@ class ProfilController extends Controller
             'password_baru' => 'required|min:6|confirmed'
         ]);
         
-        /** @var \App\Models\Karyawan $karyawan */
+        /** @var Karyawan $karyawan */
         $karyawan = Auth::guard('karyawan')->user();
         
         if (!Hash::check($validated['password_lama'], $karyawan->password)) {

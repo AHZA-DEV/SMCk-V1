@@ -40,6 +40,7 @@
 
     <!-- Custom JavaScript -->
     <script src="{{ asset('template/assets/js/script.js') }}"></script>
+    <!-- <script src="{{ asset('template/assets/js/mobile-menu.js') }}"></script> -->
 
     @stack('scripts')
 </body>

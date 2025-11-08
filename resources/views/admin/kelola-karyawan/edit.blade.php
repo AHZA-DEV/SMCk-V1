@@ -41,27 +41,13 @@
                 </div>
             </div>
 
-            <div class="row">
-                <div class="col-md-6">
-                    <div class="mb-3">
-                        <label for="nama_depan" class="form-label">Nama Depan <span class="text-danger">*</span></label>
-                        <input type="text" class="form-control @error('nama_depan') is-invalid @enderror" 
-                               id="nama_depan" name="nama_depan" value="{{ old('nama_depan', $karyawan->nama_depan) }}" required>
-                        @error('nama_depan')
-                            <div class="invalid-feedback">{{ $message }}</div>
-                        @enderror
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="mb-3">
-                        <label for="nama_belakang" class="form-label">Nama Belakang <span class="text-danger">*</span></label>
-                        <input type="text" class="form-control @error('nama_belakang') is-invalid @enderror" 
-                               id="nama_belakang" name="nama_belakang" value="{{ old('nama_belakang', $karyawan->nama_belakang) }}" required>
-                        @error('nama_belakang')
-                            <div class="invalid-feedback">{{ $message }}</div>
-                        @enderror
-                    </div>
-                </div>
+            <div class="mb-3">
+                <label for="nama" class="form-label">Nama Lengkap <span class="text-danger">*</span></label>
+                <input type="text" class="form-control @error('nama') is-invalid @enderror" 
+                       id="nama" name="nama" value="{{ old('nama', $karyawan->nama) }}" required>
+                @error('nama')
+                    <div class="invalid-feedback">{{ $message }}</div>
+                @enderror
             </div>
 
             <div class="row">

@@ -32,7 +32,11 @@
         <div class="col-md-4">
             <div class="card">
                 <div class="card-body text-center">
-                    <i class="bi bi-person-circle" style="font-size: 100px; color: #6c757d;"></i>
+                    @if($karyawan->foto_profil)
+                        <img src="{{ asset('storage/' . $karyawan->foto_profil) }}" alt="Profile" class="rounded-circle" width="100" height="100" style="object-fit: cover;">
+                    @else
+                        <i class="bi bi-person-circle" style="font-size: 100px; color: #6c757d;"></i>
+                    @endif
                     <h4 class="mt-3">{{ $karyawan->nama }}</h4>
                     <p class="text-muted">{{ ucfirst($karyawan->peran) }}</p>
                     <p class="text-muted"><i class="bi bi-envelope"></i> {{ $karyawan->email }}</p>
@@ -46,9 +50,15 @@
                     <h5 class="mb-0">Informasi Pribadi</h5>
                 </div>
                 <div class="card-body">
-                    <form action="{{ route('hrd.profil.update') }}" method="POST">
+                    <form action="{{ route('hrd.profil.update') }}" method="POST" enctype="multipart/form-data">
                         @csrf
                         @method('PUT')
+                        
+                        <div class="mb-3">
+                            <label class="form-label">Foto Profil</label>
+                            <input type="file" name="foto_profil" class="form-control" accept="image/*">
+                            <small class="text-muted">Format: JPG, PNG, maksimal 2MB</small>
+                        </div>
                         
                         <div class="mb-3">
                             <label class="form-label">Nama Lengkap</label>

@@ -1,4 +1,3 @@
-
 @extends('layouts.app')
 
 @section('content')
@@ -29,7 +28,7 @@
             <div class="col-md-6">
                 <input type="text" class="form-control" placeholder="Cari karyawan...">
             </div>
-            <div class="col-md-3">
+            <!-- <div class="col-md-3">
                 <select class="form-select">
                     <option value="">Semua Departemen</option>
                     <option>IT</option>
@@ -43,7 +42,7 @@
                     <option>Aktif</option>
                     <option>Non-Aktif</option>
                 </select>
-            </div>
+            </div> -->
         </div>
     </div>
     <div class="card-body">
@@ -75,21 +74,23 @@
                                 {{ strtoupper($karyawan->peran) }}
                             </span>
                         </td>
-                        <td>
-                            <a href="{{ route('admin.karyawan.show', $karyawan->id) }}" class="btn btn-sm btn-info" title="Detail">
-                                <i class="bi bi-eye"></i>
-                            </a>
-                            <a href="{{ route('admin.karyawan.edit', $karyawan->id) }}" class="btn btn-sm btn-warning" title="Edit">
-                                <i class="bi bi-pencil"></i>
-                            </a>
-                            <form action="{{ route('admin.karyawan.destroy', $karyawan->id) }}" method="POST" class="d-inline"
-                                  onsubmit="return confirm('Apakah Anda yakin ingin menghapus karyawan ini?')">
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit" class="btn btn-sm btn-danger" title="Hapus">
-                                    <i class="bi bi-trash"></i>
-                                </button>
-                            </form>
+                        <td class="">
+                            <div class="d-flex gap-2">
+                                <a href="{{ route('admin.karyawan.show', $karyawan->id) }}" class="btn btn-sm btn-info" title="Detail">
+                                    <i class="bi bi-eye"></i>
+                                </a>
+                                <a href="{{ route('admin.karyawan.edit', $karyawan->id) }}" class="btn btn-sm btn-warning" title="Edit">
+                                    <i class="bi bi-pencil"></i>
+                                </a>
+                                <form action="{{ route('admin.karyawan.destroy', $karyawan->id) }}" method="POST" class="d-inline"
+                                    onsubmit="return confirm('Apakah Anda yakin ingin menghapus karyawan ini?')">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="btn btn-sm btn-danger" title="Hapus">
+                                        <i class="bi bi-trash"></i>
+                                    </button>
+                                </form>
+                            </div>
                         </td>
                     </tr>
                     @empty
@@ -100,7 +101,7 @@
                 </tbody>
             </table>
         </div>
-        
+
         <div class="mt-3">
             {{ $karyawans->links() }}
         </div>

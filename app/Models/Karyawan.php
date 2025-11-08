@@ -38,18 +38,17 @@ class Karyawan extends Authenticatable
     ];
 
     // Accessor untuk nama lengkap
-    public function getNamaLengkapAttribute()
+    public function getNamaAttribute()
     {
         return $this->nama_depan . ' ' . $this->nama_belakang;
     }
-    
-    // Accessor untuk nama (untuk kompatibilitas)
-    public function getNamaAttribute($value)
+
+    // Mutator untuk nama
+    public function setNamaAttribute($value)
     {
-        if ($value) {
-            return $value;
-        }
-        return $this->nama_depan . ' ' . $this->nama_belakang;
+        $parts = explode(' ', $value, 2);
+        $this->attributes['nama_depan'] = $parts[0];
+        $this->attributes['nama_belakang'] = $parts[1] ?? '';
     }
 
     // Relationships

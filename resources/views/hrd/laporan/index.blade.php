@@ -12,7 +12,7 @@
 
     <div class="row mb-4">
         <div class="col-md-3">
-            <div class="card stat-card stat-card-blue">
+            <div class="card ">
                 <div class="card-body">
                     <h6>Total Pengajuan Bulan Ini</h6>
                     <h2>{{ $statistik['total_pengajuan'] }}</h2>
@@ -20,7 +20,7 @@
             </div>
         </div>
         <div class="col-md-3">
-            <div class="card stat-card stat-card-purple">
+            <div class="card ">
                 <div class="card-body">
                     <h6>Disetujui</h6>
                     <h2>{{ $statistik['disetujui'] }}</h2>
@@ -28,7 +28,7 @@
             </div>
         </div>
         <div class="col-md-3">
-            <div class="card stat-card stat-card-indigo">
+            <div class="card ">
                 <div class="card-body">
                     <h6>Ditolak</h6>
                     <h2>{{ $statistik['ditolak'] }}</h2>
@@ -36,7 +36,7 @@
             </div>
         </div>
         <div class="col-md-3">
-            <div class="card stat-card stat-card-orange">
+            <div class="card ">
                 <div class="card-body">
                     <h6>Pending</h6>
                     <h2>{{ $statistik['pending'] }}</h2>

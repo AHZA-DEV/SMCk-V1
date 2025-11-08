@@ -28,11 +28,10 @@ class KaryawanController extends Controller
             'nama' => 'required|string|max:255',
             'email' => 'required|email|unique:karyawans,email',
             'password' => 'required|min:6',
-            'departemen_id' => 'required|exists:departemens,id',
+            'id_departemen' => 'required|exists:departemens,id',
             'jabatan' => 'required|string|max:255',
-            'tanggal_masuk' => 'required|date',
+            'tanggal_mulai_kerja' => 'required|date',
             'peran' => 'required|in:karyawan,hrd',
-            'status' => 'required|in:aktif,nonaktif',
         ]);
 
         $validated['password'] = Hash::make($validated['password']);
@@ -64,11 +63,10 @@ class KaryawanController extends Controller
             'nip' => 'required|unique:karyawans,nip,' . $id,
             'nama' => 'required|string|max:255',
             'email' => 'required|email|unique:karyawans,email,' . $id,
-            'departemen_id' => 'required|exists:departemens,id',
+            'id_departemen' => 'required|exists:departemens,id',
             'jabatan' => 'required|string|max:255',
-            'tanggal_masuk' => 'required|date',
+            'tanggal_mulai_kerja' => 'required|date',
             'peran' => 'required|in:karyawan,hrd',
-            'status' => 'required|in:aktif,nonaktif',
         ]);
 
         if ($request->filled('password')) {

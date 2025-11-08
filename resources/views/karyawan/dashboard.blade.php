@@ -10,7 +10,7 @@
 
     <div class="row g-4 mb-4">
         <div class="col-md-3">
-            <div class="card stat-card stat-card-blue">
+            <div class="card stat-card">
                 <div class="card-body">
                     <h6 class="card-subtitle mb-2">Sisa Cuti Tahunan</h6>
                     <h2 class="card-title">{{ $sisaCuti }}</h2>
@@ -20,7 +20,7 @@
         </div>
         
         <div class="col-md-3">
-            <div class="card stat-card stat-card-purple">
+            <div class="card stat-card">
                 <div class="card-body">
                     <h6 class="card-subtitle mb-2">Cuti Terpakai</h6>
                     <h2 class="card-title">{{ $cutiTerpakai }}</h2>
@@ -30,7 +30,7 @@
         </div>
         
         <div class="col-md-3">
-            <div class="card stat-card stat-card-indigo">
+            <div class="card stat-card">
                 <div class="card-body">
                     <h6 class="card-subtitle mb-2">Pengajuan Pending</h6>
                     <h2 class="card-title">{{ $pengajuanPending }}</h2>
@@ -40,7 +40,7 @@
         </div>
         
         <div class="col-md-3">
-            <div class="card stat-card stat-card-orange">
+            <div class="card stat-card">
                 <div class="card-body">
                     <h6 class="card-subtitle mb-2">Cuti Disetujui</h6>
                     <h2 class="card-title">{{ $cutiDisetujui }}</h2>
@@ -51,7 +51,7 @@
     </div>
 
     <div class="row g-4">
-        <div class="col-md-12">
+        <div class="col-md-12 d-none d-md-block">
             <div class="card">
                 <div class="card-header d-flex justify-content-between align-items-center">
                     <h5 class="mb-0">Riwayat Pengajuan Cuti Terbaru</h5>

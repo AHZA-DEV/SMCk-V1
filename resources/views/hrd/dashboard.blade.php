@@ -9,7 +9,7 @@
 
 <div class="row g-4 mb-4">
     <div class="col-md-3">
-        <div class="card stat-card stat-card-blue">
+        <div class="card">
             <div class="card-body">
                 <h6 class="card-subtitle mb-2">Pengajuan Pending</h6>
                 <h2 class="card-title">{{ $stats['pending'] }}</h2>
@@ -19,7 +19,7 @@
     </div>
     
     <div class="col-md-3">
-        <div class="card stat-card stat-card-purple">
+        <div class="card ">
             <div class="card-body">
                 <h6 class="card-subtitle mb-2">Disetujui Hari Ini</h6>
                 <h2 class="card-title">{{ $stats['disetujui_hari_ini'] }}</h2>
@@ -29,7 +29,7 @@
     </div>
     
     <div class="col-md-3">
-        <div class="card stat-card stat-card-indigo">
+        <div class="card ">
             <div class="card-body">
                 <h6 class="card-subtitle mb-2">Ditolak Bulan Ini</h6>
                 <h2 class="card-title">{{ $stats['ditolak_bulan_ini'] }}</h2>
@@ -39,7 +39,7 @@
     </div>
     
     <div class="col-md-3">
-        <div class="card stat-card stat-card-orange">
+        <div class="card ">
             <div class="card-body">
                 <h6 class="card-subtitle mb-2">Total Karyawan</h6>
                 <h2 class="card-title">{{ $stats['total_karyawan'] }}</h2>
