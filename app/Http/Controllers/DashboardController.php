@@ -18,6 +18,7 @@ class DashboardController extends Controller
         $cutiDisetujui = Cuti::where('status', 'disetujui')
             ->whereYear('tanggal_mulai', date('Y'))
             ->count();
+        $cutiDitolak = Cuti::where('status', 'ditolak')->count();
         
         $cutiTerbaru = Cuti::with(['karyawan', 'jenisCuti'])
             ->orderBy('created_at', 'desc')
@@ -29,6 +30,7 @@ class DashboardController extends Controller
             'totalDepartemen',
             'cutiPending',
             'cutiDisetujui',
+            'cutiDitolak',
             'cutiTerbaru'
         ));
     }

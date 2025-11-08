@@ -32,7 +32,7 @@
                     <tr>
                         <td>{{ $index + 1 }}</td>
                         <td>{{ $hrd->nip }}</td>
-                        <td>{{ $hrd->nama_lengkap }}</td>
+                        <td>{{ $hrd->nama }}</td>
                         <td>{{ $hrd->email }}</td>
                         <td>{{ $hrd->departemen->nama_departemen ?? '-' }}</td>
                         <td>{{ \Carbon\Carbon::parse($hrd->tanggal_mulai_kerja)->format('d/m/Y') }}</td>
